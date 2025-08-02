@@ -1,7 +1,7 @@
 // app/api/notes/[id]/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { api, ApiError } from "../api";
+import { api, ApiError } from "@/lib/api";
 
 type Props = {
   params: Promise<{ id: string }>;
