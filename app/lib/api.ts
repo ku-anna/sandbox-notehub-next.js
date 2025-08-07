@@ -21,13 +21,39 @@ axios.defaults.baseURL = "https://next-docs-api.onrender.com";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export const getNotes = async () => {
-  await delay(2000);
-  const res = await axios.get<NoteListResponse>("/notes");
+export const getNotes = async (categoryId?: string) => {
+  const res = await axios.get<NoteListResponse>("/notes", {
+    params: { categoryId },
+  });
   return res.data;
 };
 
 export const getSingleNote = async (id: string) => {
   const res = await axios.get<Note>(`/notes/${id}`);
+  return res.data;
+};
+
+export const api = {
+  getNotes,
+  getSingleNote,
+};
+
+export class ApiError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export const getCategories = async () => {
+  const res = await axios<Category[]>("/categories");
   return res.data;
 };
