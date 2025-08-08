@@ -1,0 +1,14 @@
+.notesLayout {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 16px;
+  border-right: 1px solid #eee;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+}
