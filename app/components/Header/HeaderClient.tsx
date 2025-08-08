@@ -20,7 +20,7 @@ export default function HeaderClient({ categories }: Props) {
         NoteHub
       </Link>
       <nav aria-label="Main Navigation">
-        <ul className={css.navList}>
+        <ul className={css.navigation}>
           <li>
             <CategoriesMenu categories={categories} />
           </li>
