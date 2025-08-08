@@ -1,0 +1,20 @@
+.sidebar {
+  list-style: none;
+  width: 250px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebarItem {
+  background-color: azure;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 120px;
+  color: black;
+}
+
+.sidebarItem:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
