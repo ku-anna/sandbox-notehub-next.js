@@ -1,8 +1,7 @@
-// components/Modal/Modal.tsx
-
 "use client";
 
 import { useRouter } from "next/navigation";
+import styles from "./Modal.module.css";
 
 type Props = {
   children: React.ReactNode;
@@ -14,10 +13,12 @@ const Modal = ({ children }: Props) => {
   const close = () => router.back();
 
   return (
-    <div>
-      <div>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
         {children}
-        <button onClick={close}>Close</button>
+        <button className={styles.closeButton} onClick={close}>
+          Close
+        </button>
       </div>
     </div>
   );
