@@ -57,3 +57,19 @@ export const getCategories = async () => {
   const res = await axios<Category[]>("/categories");
   return res.data;
 };
+
+// HTTP-запит
+// Тепер створимо функцію для відправлення даних на сервер.
+
+// lib/api.ts
+
+export type NewNoteData = {
+  title: string;
+  content: string;
+  categoryId: string;
+};
+
+export const createNote = async (data: NewNoteData) => {
+  const res = await axios.post<Note>("/notes", data);
+  return res.data;
+};

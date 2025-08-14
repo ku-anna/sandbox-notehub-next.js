@@ -1,0 +1,78 @@
+/* Form.module.css */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: system-ui, sans-serif;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #333;
+  gap: 0.4rem;
+}
+
+.label input,
+.label textarea,
+.label select {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.label input:focus,
+.label textarea:focus,
+.label select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+.label textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+}
+
+.buttons button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease;
+}
+
+.buttons button[type="submit"] {
+  background: #4a90e2;
+  color: white;
+}
+
+.buttons button[type="submit"]:hover {
+  background: #357ac9;
+}
+
+.buttons button[type="button"] {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.buttons button[type="button"]:hover {
+  background: #e0e0e0;
+}
