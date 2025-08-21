@@ -73,3 +73,8 @@ export const createNote = async (data: NewNoteData) => {
   const res = await axios.post<Note>("/notes", data);
   return res.data;
 };
+
+// axios.defaults.baseURL = 'https://next-docs-api.onrender.com'
+axios.defaults.baseURL = "http://localhost:3000/api";
+
+// Таким чином усі запити типу api.get('/categories') автоматично підуть спочатку на Next-сервер, який уже відправить запит до бекенду нотатків.
