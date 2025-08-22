@@ -1,7 +1,22 @@
-// lib/api.ts
-
 import axios from "axios";
 
+// Створюємо інстанс для запитів до Next.js API
+// const nextServer = axios.create({
+//   baseURL: "http://localhost:3000/api",
+//   withCredentials: true, // дозволяє працювати з cookie
+// });
+
+const isBrowser = typeof window !== "undefined";
+const API_BASE_URL = isBrowser
+  ? "/api" // коли код виконується в браузері
+  : process.env.NEXT_PUBLIC_API_URL!; // коли на сервері
+
+export const nextServer = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
+});
+
+// Типи для нотаток
 export type Note = {
   id: string;
   title: string;
@@ -17,34 +32,7 @@ export type NoteListResponse = {
   total: number;
 };
 
-axios.defaults.baseURL = "https://next-docs-api.onrender.com";
-
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export const getNotes = async (categoryId?: string) => {
-  const res = await axios.get<NoteListResponse>("/notes", {
-    params: { categoryId },
-  });
-  return res.data;
-};
-
-export const getSingleNote = async (id: string) => {
-  const res = await axios.get<Note>(`/notes/${id}`);
-  return res.data;
-};
-
-export const api = {
-  getNotes,
-  getSingleNote,
-};
-
-export class ApiError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = "ApiError";
-  }
-}
-
+// Типи для категорій
 export type Category = {
   id: string;
   name: string;
@@ -53,28 +41,70 @@ export type Category = {
   updatedAt: string;
 };
 
-export const getCategories = async () => {
-  const res = await axios<Category[]>("/categories");
-  return res.data;
+// Типи для користувача
+export type User = {
+  id: string;
+  email: string;
+  userName?: string;
+  photoUrl?: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
-// HTTP-запит
-// Тепер створимо функцію для відправлення даних на сервер.
+export type RegisterRequest = {
+  email: string;
+  password: string;
+  userName: string;
+};
 
-// lib/api.ts
-
+// Типи для створення нотатки
 export type NewNoteData = {
   title: string;
   content: string;
   categoryId: string;
 };
 
-export const createNote = async (data: NewNoteData) => {
-  const res = await axios.post<Note>("/notes", data);
+// Кастомна помилка
+export class ApiError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+// Запити
+export const getNotes = async (categoryId?: string) => {
+  const res = await nextServer.get<NoteListResponse>("/notes", {
+    params: { categoryId },
+  });
   return res.data;
 };
 
-// axios.defaults.baseURL = 'https://next-docs-api.onrender.com'
-axios.defaults.baseURL = "http://localhost:3000/api";
+export const getSingleNote = async (id: string) => {
+  const res = await nextServer.get<Note>(`/notes/${id}`);
+  return res.data;
+};
 
-// Таким чином усі запити типу api.get('/categories') автоматично підуть спочатку на Next-сервер, який уже відправить запит до бекенду нотатків.
+export const getCategories = async () => {
+  const res = await nextServer.get<Category[]>("/categories");
+  return res.data;
+};
+
+export const createNote = async (data: NewNoteData) => {
+  const res = await nextServer.post<Note>("/notes", data);
+  return res.data;
+};
+
+export const register = async (data: RegisterRequest) => {
+  const res = await nextServer.post<User>("/auth/register", data);
+  return res.data;
+};
+
+// Експорт API як об'єкта
+export const api = {
+  getNotes,
+  getSingleNote,
+  getCategories,
+  createNote,
+  register,
+};

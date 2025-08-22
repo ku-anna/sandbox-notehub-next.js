@@ -1,0 +1,37 @@
+/* app/profile/Profile.module.css */
+
+:root {
+  --primary-color: #4f46e5;
+  --background-color: #f9fafb;
+  --text-color: #374151;
+  --error-color: #dc2626;
+}
+
+.container {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #111827;
+}
+
+.info {
+  display: grid;
+  gap: 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.error {
+  color: var(--error-color);
+  text-align: center;
+  font-size: 1rem;
+}
