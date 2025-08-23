@@ -12,20 +12,6 @@ const roboto = Roboto({
   variable: "--font-roboto",
   display: "swap",
 });
-// subsets – символи, які використовуватимемо (наприклад, latin – для англійської)
-// weight – товщина шрифтів
-// variable – назва CSS-змінної
-// display: 'swap' – браузер одразу показує текст, навіть якщо шрифт ще не завантажився
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export default function RootLayout({
   children,

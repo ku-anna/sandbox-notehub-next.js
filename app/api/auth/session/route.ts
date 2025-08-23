@@ -11,7 +11,7 @@
 
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { api } from "../../api";
+import { api } from "../../../../lib/api/clientApi";
 import { parse } from "cookie";
 
 export async function GET() {

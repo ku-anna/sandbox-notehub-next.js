@@ -1,7 +1,7 @@
 // app/api/auth/register/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { api, ApiError } from "../../api";
+import { api, ApiError } from "../../../../lib/api/api";
 import { parse } from "cookie";
 import { cookies } from "next/headers";
 

@@ -1,6 +1,6 @@
 // app/api/categories/route.ts
 
-import { api, ApiError } from "../api";
+import { api, ApiError } from "../../../lib/api/api";
 import axios from "axios";
 
 // export async function GET() {

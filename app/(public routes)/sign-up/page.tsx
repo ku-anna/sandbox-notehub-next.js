@@ -1,28 +1,35 @@
+// app/(public routes)/sign-up/page.tsx
+
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { register, RegisterRequest } from "@/lib/api";
+import { register, RegisterRequest } from "../../../lib/api/clientApi";
+import { useAuthStore } from "@/lib/stores/authStore";
+import { ApiError } from "../../../lib/api/clientApi";
 import css from "./Signup.module.css";
 
-export default function SignUp() {
+const SignUp = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); // Отримуємо метод із стора
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
     try {
       const formValues = Object.fromEntries(formData) as RegisterRequest;
-
-      // Виконуємо реєстрацію
-      await register(formValues);
-
-      // Якщо все ок → редірект на профіль
-      router.push("/profile");
-    } catch (err: any) {
+      const res = await register(formValues);
+      if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
+        router.push("/profile");
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (error) {
       setError(
-        err?.response?.data?.error ??
-          err?.message ??
-          "Oops... щось пішло не так"
+        (error as ApiError).response?.data?.error ??
+          (error as ApiError).message ??
+          "Oops... some error"
       );
     }
   };
@@ -66,4 +73,6 @@ export default function SignUp() {
       {error && <p className={css.error}>{error}</p>}
     </div>
   );
-}
+};
+
+export default SignUp;

@@ -1,25 +1,31 @@
 // components/CategoriesMenu/CategoriesMenu.tsx
 
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Category } from "@/lib/api";
+import { Category, getCategories } from "../../../lib/api/clientApi";
 import css from "./CategoriesMenu.module.css";
 
-type Props = {
-  categories: Category[];
-};
+const CategoriesMenu = () => {
+  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
-const CategoriesMenu = ({ categories }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => setIsOpenMenu(!isOpenMenu);
+
+  // Додаємо стан
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  // Додаємо ефект для запиту
+  useEffect(() => {
+    // Змінюємо стан
+    getCategories().then((data) => setCategories(data));
+  }, []);
 
   return (
     <div className={css.menuContainer}>
       <button onClick={toggle} className={css.menuBtn}>
         Notes
       </button>
-      {isOpen && (
+      {open() && (
         <ul className={css.menu}>
           <li className={css.menuItem}>
             <Link href={`/notes/filter/all`} onClick={toggle}>
