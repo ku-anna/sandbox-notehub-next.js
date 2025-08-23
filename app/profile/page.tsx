@@ -1,6 +1,4 @@
 // app/profile/page.tsx
-
-import React from "react";
 import css from "./Profile.module.css";
 
 type Profile = {
@@ -11,12 +9,7 @@ type Profile = {
 
 const baseURL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-const res = await fetch(`${baseURL}/api/profile`, {
-  credentials: "include",
-  cache: "no-store",
-});
-
-// Функція для отримання даних профілю з API
+// Отримання даних профілю
 async function getProfileData(): Promise<Profile> {
   const res = await fetch(`${baseURL}/api/profile`, {
     credentials: "include",
@@ -36,7 +29,6 @@ export default async function ProfilePage() {
   } catch (err) {
     return (
       <div className={css.container}>
-        {/* Показуємо повідомлення, якщо не вдалось завантажити */}
         <p className={css.error}>
           Помилка завантаження профілю. Будь ласка, увійдіть.
         </p>
@@ -46,10 +38,7 @@ export default async function ProfilePage() {
 
   return (
     <div className={css.container}>
-      {/* Заголовок сторінки */}
       <h1 className={css.title}>Профіль користувача</h1>
-
-      {/* Інформація про юзера */}
       <div className={css.info}>
         <p>
           <strong>Username:</strong> {profile.userName}

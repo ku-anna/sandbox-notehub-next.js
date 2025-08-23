@@ -13,23 +13,10 @@ export default function SignUp() {
     try {
       const formValues = Object.fromEntries(formData) as RegisterRequest;
 
-      const res = await register(formValues);
+      // Виконуємо реєстрацію
+      await register(formValues);
 
-      // Спроба зберегти профіль — але не блокуємо редірект
-      try {
-        await fetch("/api/profile", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userName: formValues.userName,
-            email: formValues.email,
-          }),
-        });
-      } catch (profileError) {
-        console.warn("Не вдалося зберегти профіль:", profileError);
-      }
-
-      // Редірект у будь-якому випадку
+      // Якщо все ок → редірект на профіль
       router.push("/profile");
     } catch (err: any) {
       setError(

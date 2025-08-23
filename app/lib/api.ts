@@ -1,20 +1,15 @@
 import axios from "axios";
 
 // Створюємо інстанс для запитів до Next.js API
-// const nextServer = axios.create({
-//   baseURL: "http://localhost:3000/api",
-//   withCredentials: true, // дозволяє працювати з cookie
-// });
+const nextServer = axios.create({
+  baseURL: "http://localhost:3000/api",
+  withCredentials: true, // дозволяє працювати з cookie
+});
 
 const isBrowser = typeof window !== "undefined";
 const API_BASE_URL = isBrowser
   ? "/api" // коли код виконується в браузері
   : process.env.NEXT_PUBLIC_API_URL!; // коли на сервері
-
-export const nextServer = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-});
 
 // Типи для нотаток
 export type Note = {
@@ -107,4 +102,16 @@ export const api = {
   getCategories,
   createNote,
   register,
+};
+
+//LOGIN
+
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>("/auth/login", data);
+  return res.data;
 };

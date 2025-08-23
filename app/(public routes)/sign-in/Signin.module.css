@@ -1,0 +1,83 @@
+.form {
+  max-width: 380px;
+  margin: 4rem auto;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  color: #020202;
+}
+.h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #222; /* більш контрастний */
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #020202;
+}
+
+.input {
+  color: #4c4949;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fafafa;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #0070f3;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.15);
+  outline: none;
+}
+
+.button {
+  margin-top: 0.5rem;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.button:hover {
+  background-color: #0059c9;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.p {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #d00;
+  text-align: center;
+  font-weight: 500;
+}
