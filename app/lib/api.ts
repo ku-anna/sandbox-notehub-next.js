@@ -115,3 +115,21 @@ export const login = async (data: LoginRequest) => {
   const res = await nextServer.post<User>("/auth/login", data);
   return res.data;
 };
+
+//метод checkSession реалізує перевірку сесії
+type CheckSessionRequest = {
+  success: boolean;
+};
+
+export const checkSession = async () => {
+  const res = await nextServer.get<CheckSessionRequest>("/auth/session");
+  return res.data.success;
+};
+
+// Отримання об’єкта користувача
+// Наш глобальний стан повинен знати про користувача, тому зробимо ще один запит:
+
+export const getMe = async () => {
+  const { data } = await nextServer.get<User>("/auth/me");
+  return data;
+};

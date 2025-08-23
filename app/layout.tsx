@@ -1,9 +1,10 @@
 // import { Geist, Geist_Mono } from "next/font/google";
 import { Roboto } from "next/font/google";
 
-import "./globals.css";
 import Header from "./components/Header/Header";
 import TanStackProvider from "./components/TanStackProvider/TanStackProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import styles from "./layout.module.css";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -35,18 +36,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={roboto.variable}>
+      <body className={`${roboto.variable} ${styles.body}`}>
         <TanStackProvider>
-          <Header />
-          <main>
-            {children}
-            {modal}
-          </main>
-          <footer>
-            <p>
-              Created <time dateTime="2025">2025</time>
-            </p>
-          </footer>
+          <AuthProvider>
+            {" "}
+            {/* <-- додаємо провайдер */}
+            <Header />
+            <main className={styles.main}>
+              {children}
+              {modal}
+            </main>
+            <footer className={styles.footer}>
+              <p>
+                Created <time dateTime="2025">2025</time>
+              </p>
+            </footer>
+          </AuthProvider>{" "}
+          {/* <-- додаємо провайдер */}
         </TanStackProvider>
       </body>
     </html>
